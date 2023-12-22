@@ -15,7 +15,15 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "ngx-antd-jalali": ["libs/ngx-antd-jalali/src/index.ts"]
+      "ngx-antd-jalali": ["libs/ngx-antd-jalali/src/index.ts"],
+      "ngx-antd-jalali/calendar": [
+        "libs/ngx-antd-jalali/calendar/src/index.ts"
+      ],
+      "ngx-antd-jalali/core": ["libs/ngx-antd-jalali/core/src/index.ts"],
+      "ngx-antd-jalali/date-picker": [
+        "libs/ngx-antd-jalali/date-picker/src/index.ts"
+      ],
+      "ngx-antd-jalali/i18n": ["libs/ngx-antd-jalali/i18n/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
