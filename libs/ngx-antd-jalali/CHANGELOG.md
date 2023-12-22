@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.0.0...ngx-antd-jalali-v1.0.1) (2023-12-22)
+
+
+### Bug Fixes
+
+* **ngx-antd-jalali:** impl readme ([0a74db7](https://github.com/psychomet/ngx-antd-jalali/commit/0a74db7bc65082d336ba6317b27f753230ceb379))
+
 # 1.0.0 (2023-12-22)
 
 
