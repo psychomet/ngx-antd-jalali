@@ -1,6 +1,18 @@
 {
-  "name": "ngx-antd-jalali",
   "version": "0.0.1",
+  "name": "ngx-antd-jalali",
+  "description": "An DatePicker based on Ant Design and Angular",
+  "keywords": [
+    "antd",
+    "jalali",
+    "date-picker",
+    "calendar",
+    "hijri",
+    "persian",
+    "ng-zorro",
+    "angular"
+  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/psychomet/ngx-antd-jalali.git",
