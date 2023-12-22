@@ -32,6 +32,14 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx semantic-release-plus --extends ./libs/ngx-antd-jalali/release.config.js",
+        "parallel": false
+      }
     }
   }
 }
