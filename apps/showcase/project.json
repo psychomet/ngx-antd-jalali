@@ -8,16 +8,26 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/showcase",
         "index": "apps/showcase/src/index.html",
         "browser": "apps/showcase/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/showcase/tsconfig.app.json",
         "inlineStyleLanguage": "less",
-        "assets": ["apps/showcase/src/favicon.ico", "apps/showcase/src/assets"],
-        "styles": ["apps/showcase/src/styles.less"],
+        "assets": [
+          "apps/showcase/src/favicon.ico",
+          "apps/showcase/src/assets"
+        ],
+        "styles": [
+          "apps/showcase/src/styles.less",
+          "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -64,11 +74,15 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/showcase/jest.config.ts"
       }
