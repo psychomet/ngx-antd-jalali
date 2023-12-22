@@ -3,5 +3,6 @@
   "dest": "../../dist/libs/ngx-antd-jalali",
   "lib": {
     "entryFile": "src/index.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["ng-zorro-antd", "angular"]
 }
