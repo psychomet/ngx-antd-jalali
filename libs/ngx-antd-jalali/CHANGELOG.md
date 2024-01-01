@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.0.1...ngx-antd-jalali-v1.1.0) (2024-01-01)
+
+
+### Features
+
+* **ngx-antd-jalali:** impl time-picker ([d8bc239](https://github.com/psychomet/ngx-antd-jalali/commit/d8bc23980eb089e4b7ca0d45f27389dd930d94aa))
+
 ## [1.0.1](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.0.0...ngx-antd-jalali-v1.0.1) (2023-12-22)
 
 
