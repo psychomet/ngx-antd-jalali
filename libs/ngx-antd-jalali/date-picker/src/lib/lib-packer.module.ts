@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 
 import { NzI18nModule } from 'ngx-antd-jalali/i18n';
-import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzTimePickerModule } from 'ngx-antd-jalali/time-picker';
 import { DateHeaderComponent } from './date-header.component';
 import { DateTableComponent } from './date-table.component';
 import { DecadeHeaderComponent } from './decade-header.component';

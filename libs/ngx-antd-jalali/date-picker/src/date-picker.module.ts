@@ -14,7 +14,7 @@ import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzOverlayModule } from 'ng-zorro-antd/core/overlay';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzTimePickerModule } from 'ngx-antd-jalali/time-picker';
 
 import { CalendarFooterComponent } from './calendar-footer.component';
 import { NzDatePickerComponent } from './date-picker.component';

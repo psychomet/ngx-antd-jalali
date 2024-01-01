@@ -155,7 +155,7 @@ import { PREFIX_CLASS } from './util';
       <ng-container *ngIf="showTimePicker && timeOptions">
         <nz-time-picker-panel
           [nzInDatePicker]="true"
-          [ngModel]="value.nativeDate"
+          [ngModel]="value?.nativeDate"
           (ngModelChange)="onSelectTime($event)"
           [format]="$any(timeOptions.nzFormat)"
           [nzHourStep]="$any(timeOptions.nzHourStep)"

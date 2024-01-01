@@ -23,7 +23,10 @@
       "ngx-antd-jalali/date-picker": [
         "libs/ngx-antd-jalali/date-picker/src/index.ts"
       ],
-      "ngx-antd-jalali/i18n": ["libs/ngx-antd-jalali/i18n/src/index.ts"]
+      "ngx-antd-jalali/i18n": ["libs/ngx-antd-jalali/i18n/src/index.ts"],
+      "ngx-antd-jalali/time-picker": [
+        "libs/ngx-antd-jalali/time-picker/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

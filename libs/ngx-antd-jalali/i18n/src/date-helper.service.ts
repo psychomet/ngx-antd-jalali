@@ -118,7 +118,7 @@ export class DateHelperByDatePipe extends DateHelperService {
   getFirstDayOfWeek(): WeekDayIndex {
     if (this.config.firstDayOfWeek === undefined) {
       const locale = this.i18n.getLocaleId();
-      return locale && ['zh-cn', 'zh-tw'].indexOf(locale.toLowerCase()) > -1
+      return locale && ['en_US'].indexOf(locale.toLowerCase()) > -1
         ? 1
         : 0;
     }
