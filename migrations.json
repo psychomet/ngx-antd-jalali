@@ -1,0 +1,11 @@
+{
+  "migrations": [
+    {
+      "version": "18.0.0-0",
+      "description": "Updates NG-ZORRO to v18 [https://github.com/NG-ZORRO/ng-zorro-antd/issues/8546]",
+      "factory": "./ng-update/index#updateToV18",
+      "package": "ng-zorro-antd",
+      "name": "migration-v18"
+    }
+  ]
+}
