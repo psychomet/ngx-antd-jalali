@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.1.0...ngx-antd-jalali-v1.2.0) (2024-07-01)
+
+
+### Bug Fixes
+
+* **ngx-antd-jalali:** update peerDependencies ([ac1c2c8](https://github.com/psychomet/ngx-antd-jalali/commit/ac1c2c8c6ddb86cfa13095c4b477945321452f8d))
+
+
+### Features
+
+* **ngx-antd-jalali:** update nx, ng-zorro-antd and angular ([65d31ca](https://github.com/psychomet/ngx-antd-jalali/commit/65d31ca21b0e5d01c564990b66ef7bba8cdea450))
+
 # [1.1.0](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.0.1...ngx-antd-jalali-v1.1.0) (2024-01-01)
 
 
