@@ -27,7 +27,7 @@ View DatePickerJalali in action at [Stackblitz Demo](https://stackblitz.com/edit
 
 ## 🖥 Environment Support
 
-- Angular `^17.0.0` [![npm package](https://img.shields.io/npm/v/ng-zorro-antd.svg?style=flat-square)](https://www.npmjs.org/package/ng-zorro-antd)
+- Angular `^19.0.0` [![npm package](https://img.shields.io/npm/v/ng-zorro-antd.svg?style=flat-square)](https://www.npmjs.org/package/ng-zorro-antd)
 - Server-side Rendering
 - Modern browsers including the following [specific versions](https://angular.io/guide/browser-support)
 
