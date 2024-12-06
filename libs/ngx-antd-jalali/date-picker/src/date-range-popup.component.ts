@@ -50,12 +50,12 @@ import {
 import { getTimeConfig, isAllowedDate, PREFIX_CLASS } from './util';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'date-range-popup',
-  exportAs: 'dateRangePopup',
-  template: `
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'date-range-popup',
+    exportAs: 'dateRangePopup',
+    template: `
     <ng-container *ngIf="isRange; else singlePanel">
       <div
         class="{{ prefixCls }}-range-wrapper {{ prefixCls }}-date-range-wrapper"
@@ -168,6 +168,7 @@ import { getTimeConfig, isAllowedDate, PREFIX_CLASS } from './util';
       </li>
     </ng-template>
   `,
+    standalone: false
 })
 export class DateRangePopupComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isRange!: boolean;

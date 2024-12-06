@@ -3,11 +3,10 @@ import { NzDatePickerModule } from 'ngx-antd-jalali/date-picker';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  standalone: true,
-  imports: [NzDatePickerModule, FormsModule],
-  selector: 'ngx-antd-jalali-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.less',
+    imports: [NzDatePickerModule, FormsModule],
+    selector: 'ngx-antd-jalali-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.less'
 })
 export class AppComponent {
   date = new Date();

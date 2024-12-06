@@ -18,11 +18,12 @@ import { PanelSelector } from './interface';
 import { transCompatFormat } from './util';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'month-header', // eslint-disable-line @angular-eslint/component-selector
-  exportAs: 'monthHeader',
-  templateUrl: './abstract-panel-header.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'month-header', // eslint-disable-line @angular-eslint/component-selector
+    exportAs: 'monthHeader',
+    templateUrl: './abstract-panel-header.html',
+    standalone: false
 })
 export class MonthHeaderComponent extends AbstractPanelHeader {
   constructor(

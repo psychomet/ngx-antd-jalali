@@ -24,11 +24,11 @@ import {
 import { NzSelectSizeType } from 'ng-zorro-antd/select';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'nz-calendar-header',
-  exportAs: 'nzCalendarHeader',
-  template: `
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nz-calendar-header',
+    exportAs: 'nzCalendarHeader',
+    template: `
     <div class="ant-picker-calendar-header">
       <nz-select
         class="ant-picker-calendar-year-select"
@@ -70,10 +70,11 @@ import { NzSelectSizeType } from 'ng-zorro-antd/select';
       </nz-radio-group>
     </div>
   `,
-  host: {
-    class: 'ant-fullcalendar-header',
-    '[style.display]': `'block'`,
-  },
+    host: {
+        class: 'ant-fullcalendar-header',
+        '[style.display]': `'block'`,
+    },
+    standalone: false
 })
 export class NzCalendarHeaderComponent implements OnInit {
   @Input() mode: 'month' | 'year' = 'month';

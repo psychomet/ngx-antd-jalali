@@ -28,12 +28,12 @@ import { transCompatFormat } from './lib/util';
 import { PREFIX_CLASS } from './util';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'calendar-footer',
-  exportAs: 'calendarFooter',
-  template: `
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'calendar-footer',
+    exportAs: 'calendarFooter',
+    template: `
     <div class="{{ prefixCls }}-footer">
       <div *ngIf="extraFooter" class="{{ prefixCls }}-footer-extra">
         <ng-container [ngSwitch]="true">
@@ -84,6 +84,7 @@ import { PREFIX_CLASS } from './util';
       </ul>
     </div>
   `,
+    standalone: false
 })
 export class CalendarFooterComponent implements OnChanges {
   @Input() locale!: NzCalendarI18nInterface;

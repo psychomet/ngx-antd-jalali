@@ -28,12 +28,13 @@ import { DateBodyRow, DateCell } from './interface';
 import { transCompatFormat } from './util';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'date-table',
-  exportAs: 'dateTable',
-  templateUrl: './abstract-table.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'date-table',
+    exportAs: 'dateTable',
+    templateUrl: './abstract-table.html',
+    standalone: false
 })
 export class DateTableComponent
   extends AbstractTable

@@ -41,11 +41,11 @@ export type NzCalendarMode = 'month' | 'year';
 type NzCalendarDateTemplate = TemplateRef<{ $implicit: Date }>;
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'nz-calendar',
-  exportAs: 'nzCalendar',
-  template: `
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nz-calendar',
+    exportAs: 'nzCalendar',
+    template: `
     <nz-calendar-header
       [fullscreen]="nzFullscreen"
       [activeDate]="activeDate"
@@ -89,19 +89,20 @@ type NzCalendarDateTemplate = TemplateRef<{ $implicit: Date }>;
       ></month-table>
     </ng-template>
   `,
-  host: {
-    class: 'ant-picker-calendar',
-    '[class.ant-picker-calendar-full]': 'nzFullscreen',
-    '[class.ant-picker-calendar-mini]': '!nzFullscreen',
-    '[class.ant-picker-calendar-rtl]': `dir === 'rtl'`,
-  },
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NzCalendarComponent),
-      multi: true,
+    host: {
+        class: 'ant-picker-calendar',
+        '[class.ant-picker-calendar-full]': 'nzFullscreen',
+        '[class.ant-picker-calendar-mini]': '!nzFullscreen',
+        '[class.ant-picker-calendar-rtl]': `dir === 'rtl'`,
     },
-  ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NzCalendarComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class NzCalendarComponent
   implements ControlValueAccessor, OnChanges, OnInit, OnDestroy

@@ -8,8 +8,9 @@ import { Directive, Host, Optional } from '@angular/core';
 import { NzDatePickerComponent } from './date-picker.component';
 
 @Directive({
-  selector: 'nz-month-picker',
-  exportAs: 'nzMonthPicker',
+    selector: 'nz-month-picker',
+    exportAs: 'nzMonthPicker',
+    standalone: false
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class NzMonthPickerComponent {

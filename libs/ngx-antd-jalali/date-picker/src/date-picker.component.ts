@@ -103,12 +103,11 @@ export type NzDatePickerSizeType = 'large' | 'default' | 'small';
  * The base picker for all common APIs
  */
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector:
-    'nz-date-picker,nz-week-picker,nz-month-picker,nz-year-picker,nz-range-picker',
-  exportAs: 'nzDatePicker',
-  template: `
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nz-date-picker,nz-week-picker,nz-month-picker,nz-year-picker,nz-range-picker',
+    exportAs: 'nzDatePicker',
+    template: `
     <ng-container *ngIf="!nzInline; else inlineMode">
       <!-- Content of single picker -->
       <div *ngIf="!isRange" class="{{ prefixCls }}-input">
@@ -264,26 +263,27 @@ export type NzDatePickerSizeType = 'large' | 'default' | 'small';
       </div>
     </ng-template>
   `,
-  host: {
-    '[class.ant-picker]': `true`,
-    '[class.ant-picker-range]': `isRange`,
-    '[class.ant-picker-large]': `nzSize === 'large'`,
-    '[class.ant-picker-small]': `nzSize === 'small'`,
-    '[class.ant-picker-disabled]': `nzDisabled`,
-    '[class.ant-picker-rtl]': `dir === 'rtl'`,
-    '[class.ant-picker-borderless]': `nzBorderless`,
-    '[class.ant-picker-inline]': `nzInline`,
-    '(click)': 'onClickInputBox($event)',
-  },
-  providers: [
-    DatePickerService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => NzDatePickerComponent),
+    host: {
+        '[class.ant-picker]': `true`,
+        '[class.ant-picker-range]': `isRange`,
+        '[class.ant-picker-large]': `nzSize === 'large'`,
+        '[class.ant-picker-small]': `nzSize === 'small'`,
+        '[class.ant-picker-disabled]': `nzDisabled`,
+        '[class.ant-picker-rtl]': `dir === 'rtl'`,
+        '[class.ant-picker-borderless]': `nzBorderless`,
+        '[class.ant-picker-inline]': `nzInline`,
+        '(click)': 'onClickInputBox($event)',
     },
-  ],
-  animations: [slideMotion],
+    providers: [
+        DatePickerService,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            multi: true,
+            useExisting: forwardRef(() => NzDatePickerComponent),
+        },
+    ],
+    animations: [slideMotion],
+    standalone: false
 })
 export class NzDatePickerComponent
   implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor

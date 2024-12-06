@@ -22,12 +22,13 @@ import { AbstractTable } from './abstract-table';
 import { DateBodyRow, DateCell, YearCell } from './interface';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'year-table',
-  exportAs: 'yearTable',
-  templateUrl: 'abstract-table.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'year-table',
+    exportAs: 'yearTable',
+    templateUrl: 'abstract-table.html',
+    standalone: false
 })
 export class YearTableComponent extends AbstractTable {
   override MAX_ROW = 4;

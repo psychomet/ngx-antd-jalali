@@ -12,11 +12,12 @@ import { AbstractPanelHeader } from './abstract-panel-header';
 import { PanelSelector } from './interface';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'year-header', // eslint-disable-line @angular-eslint/component-selector
-  exportAs: 'yearHeader',
-  templateUrl: './abstract-panel-header.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'year-header', // eslint-disable-line @angular-eslint/component-selector
+    exportAs: 'yearHeader',
+    templateUrl: './abstract-panel-header.html',
+    standalone: false
 })
 export class YearHeaderComponent extends AbstractPanelHeader {
   get startYear(): number {

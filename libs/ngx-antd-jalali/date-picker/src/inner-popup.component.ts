@@ -29,12 +29,12 @@ import {
 import { PREFIX_CLASS } from './util';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'inner-popup',
-  exportAs: 'innerPopup',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'inner-popup',
+    exportAs: 'innerPopup',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <div [class.ant-picker-datetime-panel]="showTimePicker">
       <div class="{{ prefixCls }}-{{ panelMode }}-panel">
         <ng-container [ngSwitch]="panelMode">
@@ -173,6 +173,7 @@ import { PREFIX_CLASS } from './util';
       </ng-container>
     </div>
   `,
+    standalone: false
 })
 export class InnerPopupComponent implements OnChanges {
   @Input() activeDate!: CandyDate;

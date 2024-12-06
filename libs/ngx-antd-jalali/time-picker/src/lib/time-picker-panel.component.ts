@@ -41,11 +41,11 @@ function makeRange(length: number, step: number = 1, start: number = 0): number[
 export type NzTimePickerUnit = 'hour' | 'minute' | 'second' | '12-hour';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'nz-time-picker-panel',
-  exportAs: 'nzTimePickerPanel',
-  template: `
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nz-time-picker-panel',
+    exportAs: 'nzTimePickerPanel',
+    template: `
     <div *ngIf="nzInDatePicker" class="ant-picker-header">
       <div class="ant-picker-header-view">{{ dateHelper.format($any(time?.value), format) || '&nbsp;' }}</div>
     </div>
@@ -119,18 +119,17 @@ export type NzTimePickerUnit = 'hour' | 'minute' | 'second' | '12-hour';
       </ul>
     </div>
   `,
-  host: {
-    class: 'ant-picker-time-panel',
-    '[class.ant-picker-time-panel-column-0]': `enabledColumns === 0 && !nzInDatePicker`,
-    '[class.ant-picker-time-panel-column-1]': `enabledColumns === 1 && !nzInDatePicker`,
-    '[class.ant-picker-time-panel-column-2]': `enabledColumns === 2 && !nzInDatePicker`,
-    '[class.ant-picker-time-panel-column-3]': `enabledColumns === 3 && !nzInDatePicker`,
-    '[class.ant-picker-time-panel-narrow]': `enabledColumns < 3`,
-    '[class.ant-picker-time-panel-placement-bottomLeft]': `!nzInDatePicker`
-  },
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: NzTimePickerPanelComponent, multi: true }],
-  imports: [NgIf, NgForOf, DecimalPipe, NgTemplateOutlet, NzI18nModule, NzButtonModule],
-  standalone: true
+    host: {
+        class: 'ant-picker-time-panel',
+        '[class.ant-picker-time-panel-column-0]': `enabledColumns === 0 && !nzInDatePicker`,
+        '[class.ant-picker-time-panel-column-1]': `enabledColumns === 1 && !nzInDatePicker`,
+        '[class.ant-picker-time-panel-column-2]': `enabledColumns === 2 && !nzInDatePicker`,
+        '[class.ant-picker-time-panel-column-3]': `enabledColumns === 3 && !nzInDatePicker`,
+        '[class.ant-picker-time-panel-narrow]': `enabledColumns < 3`,
+        '[class.ant-picker-time-panel-placement-bottomLeft]': `!nzInDatePicker`
+    },
+    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: NzTimePickerPanelComponent, multi: true }],
+    imports: [NgIf, NgForOf, DecimalPipe, NgTemplateOutlet, NzI18nModule, NzButtonModule]
 })
 export class NzTimePickerPanelComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   static ngAcceptInputType_nzUse12Hours: BooleanInput;

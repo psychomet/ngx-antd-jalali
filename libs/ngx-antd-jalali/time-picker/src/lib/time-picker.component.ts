@@ -48,11 +48,11 @@ import { NzTimePickerPanelComponent } from './time-picker-panel.component';
 const NZ_CONFIG_MODULE_NAME: NzConfigKey = 'timePicker';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'nz-time-picker',
-  exportAs: 'nzTimePicker',
-  template: `
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nz-time-picker',
+    exportAs: 'nzTimePicker',
+    template: `
     <div class="ant-picker-input">
       <input
         #inputElement
@@ -128,31 +128,30 @@ const NZ_CONFIG_MODULE_NAME: NzConfigKey = 'timePicker';
       </div>
     </ng-template>
   `,
-  host: {
-    class: 'ant-picker',
-    '[class.ant-picker-large]': `nzSize === 'large'`,
-    '[class.ant-picker-small]': `nzSize === 'small'`,
-    '[class.ant-picker-disabled]': `nzDisabled`,
-    '[class.ant-picker-focused]': `focused`,
-    '[class.ant-picker-rtl]': `dir === 'rtl'`,
-    '[class.ant-picker-borderless]': `nzBorderless`,
-    '(click)': 'open()'
-  },
-  animations: [slideMotion],
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: NzTimePickerComponent, multi: true }],
-  imports: [
-    AsyncPipe,
-    FormsModule,
-    NzOutletModule,
-    NzIconModule,
-    NzFormPatchModule,
-    NgIf,
-    NzTimePickerPanelComponent,
-    NgClass,
-    NzOverlayModule,
-    OverlayModule
-  ],
-  standalone: true
+    host: {
+        class: 'ant-picker',
+        '[class.ant-picker-large]': `nzSize === 'large'`,
+        '[class.ant-picker-small]': `nzSize === 'small'`,
+        '[class.ant-picker-disabled]': `nzDisabled`,
+        '[class.ant-picker-focused]': `focused`,
+        '[class.ant-picker-rtl]': `dir === 'rtl'`,
+        '[class.ant-picker-borderless]': `nzBorderless`,
+        '(click)': 'open()'
+    },
+    animations: [slideMotion],
+    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: NzTimePickerComponent, multi: true }],
+    imports: [
+        AsyncPipe,
+        FormsModule,
+        NzOutletModule,
+        NzIconModule,
+        NzFormPatchModule,
+        NgIf,
+        NzTimePickerPanelComponent,
+        NgClass,
+        NzOverlayModule,
+        OverlayModule
+    ]
 })
 export class NzTimePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy {
   readonly _nzModuleName: NzConfigKey = NZ_CONFIG_MODULE_NAME;

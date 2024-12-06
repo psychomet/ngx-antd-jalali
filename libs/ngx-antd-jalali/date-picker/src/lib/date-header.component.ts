@@ -18,11 +18,12 @@ import { PanelSelector } from './interface';
 import { transCompatFormat } from './util';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'date-header', // eslint-disable-line @angular-eslint/component-selector
-  exportAs: 'dateHeader',
-  templateUrl: './abstract-panel-header.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'date-header', // eslint-disable-line @angular-eslint/component-selector
+    exportAs: 'dateHeader',
+    templateUrl: './abstract-panel-header.html',
+    standalone: false
 })
 export class DateHeaderComponent extends AbstractPanelHeader {
   constructor(

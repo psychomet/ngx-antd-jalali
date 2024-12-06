@@ -24,12 +24,13 @@ import { AbstractTable } from './abstract-table';
 import { DateBodyRow, DateCell } from './interface';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'month-table',
-  exportAs: 'monthTable',
-  templateUrl: 'abstract-table.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'month-table',
+    exportAs: 'monthTable',
+    templateUrl: 'abstract-table.html',
+    standalone: false
 })
 export class MonthTableComponent
   extends AbstractTable
