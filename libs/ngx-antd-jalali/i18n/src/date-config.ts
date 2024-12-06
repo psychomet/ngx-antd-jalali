@@ -39,7 +39,7 @@ export const NZ_DATE_CONFIG_DEFAULT: NzDateConfig = {
     dateInput: 'yyyy-MM-dd',
     dateTimeInput: 'yyyy-MM-dd HH:mm:ss',
     dayLabel: 'dd',
-    weekLabel: 'EEEE',
+    weekLabel: 'ddd',
     monthLabel: 'MMM',
     yearLabel: 'yyyy',
     weekYearLabel: 'yyyy-ww',
