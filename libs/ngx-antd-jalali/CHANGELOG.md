@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.2.0...ngx-antd-jalali-v1.3.0) (2024-12-06)
+
+
+### Bug Fixes
+
+* **ngx-antd-jalali:** change shortWeekLabel ([58c16cf](https://github.com/psychomet/ngx-antd-jalali/commit/58c16cf90347051899a396ccd4b26b4489969bc0)), closes [#2](https://github.com/psychomet/ngx-antd-jalali/issues/2)
+
+
+### Features
+
+* update monorepo ([5c37f51](https://github.com/psychomet/ngx-antd-jalali/commit/5c37f51ec6f344b96626e2604210e2e48f96ad0c))
+
 # [1.2.0](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.1.0...ngx-antd-jalali-v1.2.0) (2024-07-01)
 
 
