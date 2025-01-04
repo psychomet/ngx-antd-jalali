@@ -5,3 +5,4 @@ export {
   NgTimeParser as ɵNgTimeParser,
   TimeResult as ɵTimeResult,
 } from './time/time-parser';
+export * from './config/config.service';
