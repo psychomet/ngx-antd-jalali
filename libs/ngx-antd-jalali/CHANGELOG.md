@@ -1,3 +1,12 @@
+## [1.3.1](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.3.0...ngx-antd-jalali-v1.3.1) (2025-01-04)
+
+
+### Bug Fixes
+
+* **ngx-antd-jalali:** impl WithConfig legacy decorator ([dad0c59](https://github.com/psychomet/ngx-antd-jalali/commit/dad0c59e7fdd2d2046ddb9e50962c9f4c6546b02))
+* **ngx-antd-jalali:** reimport withconfig decorator ([2e4bbec](https://github.com/psychomet/ngx-antd-jalali/commit/2e4bbec278a49d9fd4659c38afd84e060d93f631))
+* **ngx-antd-jalali:** update peerDeps angular n ng-zorro ([2bd160d](https://github.com/psychomet/ngx-antd-jalali/commit/2bd160dedbbd78acf8ae940390a0350908648749))
+
 # [1.3.0](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.2.0...ngx-antd-jalali-v1.3.0) (2024-12-06)
 
 
