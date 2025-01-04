@@ -33,7 +33,7 @@ import { distinctUntilChanged, map, takeUntil, withLatestFrom } from 'rxjs/opera
 import { isValid } from 'date-fns';
 
 import { slideMotion } from 'ng-zorro-antd/core/animation';
-import { NzConfigKey, NzConfigService, WithConfig } from 'ng-zorro-antd/core/config';
+import { NzConfigKey, NzConfigService } from 'ng-zorro-antd/core/config';
 import { NzFormNoStatusService, NzFormPatchModule, NzFormStatusService } from 'ng-zorro-antd/core/form';
 import { warn } from 'ng-zorro-antd/core/logger';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
@@ -44,6 +44,7 @@ import { DateHelperService, NzI18nInterface, NzI18nService } from 'ngx-antd-jala
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { NzTimePickerPanelComponent } from './time-picker-panel.component';
+import { WithConfig } from 'ngx-antd-jalali/core';
 
 const NZ_CONFIG_MODULE_NAME: NzConfigKey = 'timePicker';
 
@@ -167,10 +168,10 @@ export class NzTimePickerComponent implements ControlValueAccessor, OnInit, Afte
   private _onChange?: (value: Date | null) => void;
   private _onTouched?: () => void;
   private destroy$ = new Subject<void>();
-  private isNzDisableFirstChange: boolean = true;
+  private isNzDisableFirstChange = true;
   isInit = false;
   focused = false;
-  inputValue: string = '';
+  inputValue = '';
   value: Date | null = null;
   preValue: Date | null = null;
   origin!: CdkOverlayOrigin;
@@ -208,42 +209,42 @@ export class NzTimePickerComponent implements ControlValueAccessor, OnInit, Afte
   ] as ConnectionPositionPair[];
   dir: Direction = 'ltr';
   // status
-  prefixCls: string = 'ant-picker';
+  prefixCls = 'ant-picker';
   statusCls: NgClassInterface = {};
   status: NzValidateStatus = '';
-  hasFeedback: boolean = false;
+  hasFeedback = false;
 
   @ViewChild('inputElement', { static: true }) inputRef!: ElementRef<HTMLInputElement>;
   @Input() nzId: string | null = null;
   @Input() nzSize: string | null = null;
   @Input() nzStatus: NzStatus = '';
-  @Input() @WithConfig() nzHourStep: number = 1;
-  @Input() @WithConfig() nzMinuteStep: number = 1;
-  @Input() @WithConfig() nzSecondStep: number = 1;
-  @Input() @WithConfig() nzClearText: string = 'clear';
-  @Input() @WithConfig() nzNowText: string = '';
-  @Input() @WithConfig() nzOkText: string = '';
-  @Input() @WithConfig() nzPopupClassName: string = '';
+  @Input() @WithConfig() nzHourStep = 1;
+  @Input() @WithConfig() nzMinuteStep = 1;
+  @Input() @WithConfig() nzSecondStep = 1;
+  @Input() @WithConfig() nzClearText = 'clear';
+  @Input() @WithConfig() nzNowText = '';
+  @Input() @WithConfig() nzOkText = '';
+  @Input() @WithConfig() nzPopupClassName = '';
   @Input() nzPlaceHolder = '';
   @Input() nzAddOn?: TemplateRef<void>;
   @Input() nzDefaultOpenValue?: Date;
   @Input() nzDisabledHours?: () => number[];
   @Input() nzDisabledMinutes?: (hour: number) => number[];
   @Input() nzDisabledSeconds?: (hour: number, minute: number) => number[];
-  @Input() @WithConfig() nzFormat: string = 'HH:mm:ss';
+  @Input() @WithConfig() nzFormat = 'HH:mm:ss';
   @Input() nzOpen = false;
-  @Input() @WithConfig() @InputBoolean() nzUse12Hours: boolean = false;
+  @Input() @WithConfig() @InputBoolean() nzUse12Hours = false;
   @Input() @WithConfig() nzSuffixIcon: string | TemplateRef<NzSafeAny> = 'clock-circle';
 
   @Output() readonly nzOpenChange = new EventEmitter<boolean>();
 
   @Input() @InputBoolean() nzHideDisabledOptions = false;
-  @Input() @WithConfig() @InputBoolean() nzAllowEmpty: boolean = true;
+  @Input() @WithConfig() @InputBoolean() nzAllowEmpty = true;
   @Input() @InputBoolean() nzDisabled = false;
   @Input() @InputBoolean() nzAutoFocus = false;
   @Input() @WithConfig() nzBackdrop = false;
-  @Input() @InputBoolean() nzBorderless: boolean = false;
-  @Input() @InputBoolean() nzInputReadOnly: boolean = false;
+  @Input() @InputBoolean() nzBorderless = false;
+  @Input() @InputBoolean() nzInputReadOnly = false;
 
   emitValue(value: Date | null): void {
     this.setValue(value, true);
@@ -257,7 +258,7 @@ export class NzTimePickerComponent implements ControlValueAccessor, OnInit, Afte
     }
   }
 
-  setValue(value: Date | null, syncPreValue: boolean = false): void {
+  setValue(value: Date | null, syncPreValue = false): void {
     if (syncPreValue) {
       this.preValue = isValid(value) ? new Date(value!) : null;
     }
