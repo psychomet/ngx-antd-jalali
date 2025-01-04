@@ -48,15 +48,14 @@ import { slideMotion } from 'ng-zorro-antd/core/animation';
 import {
   NzConfigKey,
   NzConfigService,
-  WithConfig,
 } from 'ng-zorro-antd/core/config';
 import { NzNoAnimationDirective } from 'ng-zorro-antd/core/no-animation';
 import {
   CandyDate,
   CandyDateFac,
   cloneDate,
-  CompatibleValue,
-  wrongSortOrder,
+  CompatibleValue, WithConfig,
+  wrongSortOrder
 } from 'ngx-antd-jalali/core';
 import {
   BooleanInput,
