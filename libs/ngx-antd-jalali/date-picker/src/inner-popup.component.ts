@@ -37,8 +37,8 @@ import { PREFIX_CLASS } from './util';
     template: `
     <div [class.ant-picker-datetime-panel]="showTimePicker">
       <div class="{{ prefixCls }}-{{ panelMode }}-panel">
-        <ng-container [ngSwitch]="panelMode">
-          <ng-container *ngSwitchCase="'decade'">
+        @switch (panelMode) {
+          @case ('decade') {
             <decade-header
               [(value)]="activeDate"
               [locale]="locale"
@@ -58,8 +58,8 @@ import { PREFIX_CLASS } from './util';
                 [disabledDate]="disabledDate"
               ></decade-table>
             </div>
-          </ng-container>
-          <ng-container *ngSwitchCase="'year'">
+          }
+          @case ('year') {
             <year-header
               [(value)]="activeDate"
               [locale]="locale"
@@ -82,8 +82,8 @@ import { PREFIX_CLASS } from './util';
                 (cellHover)="cellHover.emit($event)"
               ></year-table>
             </div>
-          </ng-container>
-          <ng-container *ngSwitchCase="'month'">
+          }
+          @case ('month') {
             <month-header
               [(value)]="activeDate"
               [locale]="locale"
@@ -106,9 +106,8 @@ import { PREFIX_CLASS } from './util';
                 (cellHover)="cellHover.emit($event)"
               ></month-table>
             </div>
-          </ng-container>
-
-          <ng-container *ngSwitchDefault>
+          }
+          @default {
             <date-header
               [(value)]="activeDate"
               [locale]="locale"
@@ -149,13 +148,13 @@ import { PREFIX_CLASS } from './util';
                 (cellHover)="cellHover.emit($event)"
               ></date-table>
             </div>
-          </ng-container>
-        </ng-container>
+          }
+        }
       </div>
-      <ng-container *ngIf="showTimePicker && timeOptions">
+      @if (showTimePicker && timeOptions) {
         <nz-time-picker-panel
           [nzInDatePicker]="true"
-          [ngModel]="value?.nativeDate"
+          [ngModel]="$safeNavigationMigration(value?.nativeDate)"
           (ngModelChange)="onSelectTime($event)"
           [format]="$any(timeOptions.nzFormat)"
           [nzHourStep]="$any(timeOptions.nzHourStep)"
@@ -170,9 +169,9 @@ import { PREFIX_CLASS } from './util';
           [nzAddOn]="$any(timeOptions.nzAddOn)"
         ></nz-time-picker-panel>
         <!-- use [opened] to trigger time panel 'initPosition()' -->
-      </ng-container>
+      }
     </div>
-  `,
+    `,
     standalone: false
 })
 export class InnerPopupComponent implements OnChanges {

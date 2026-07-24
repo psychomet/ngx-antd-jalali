@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import moment, { Moment } from 'jalali-moment';
 
 import StartOf = moment.unitOfTime.StartOf;
-import { DateMode, NzDateAdapter } from 'ngx-antd-jalali/core';
+import { DateLocale, DateMode, NzDateAdapter } from 'ngx-antd-jalali/core';
 
 @Injectable()
 export class JalaliMomentDateAdapter extends NzDateAdapter<Moment> {
@@ -141,7 +141,7 @@ export class JalaliMomentDateAdapter extends NzDateAdapter<Moment> {
   parse(
     text: string,
     formatStr: string,
-    options: { locale: Locale; weekStartsOn: number } | undefined
+    options: { locale: DateLocale; weekStartsOn: number } | undefined
   ): Moment {
     return moment(text, formatStr, options?.locale.toString());
   }

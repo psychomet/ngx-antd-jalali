@@ -3,57 +3,59 @@
  * found in the LICENSE file at https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/LICENSE
  */
 
-import { Direction, Directionality } from '@angular/cdk/bidi';
-import { CdkOverlayOrigin, ConnectionPositionPair, OverlayModule } from '@angular/cdk/overlay';
-import { Platform } from '@angular/cdk/platform';
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { Directionality } from '@angular/cdk/bidi';
+import { ConnectionPositionPair, OverlayModule } from '@angular/cdk/overlay';
+import { Platform, _getEventTarget } from '@angular/cdk/platform';
+import { AsyncPipe, NgClass } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   EventEmitter,
   Input,
   OnChanges,
-  OnDestroy,
   OnInit,
-  Optional,
   Output,
   Renderer2,
   SimpleChanges,
   TemplateRef,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
+  booleanAttribute,
+  inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable, of, Subject } from 'rxjs';
-import { distinctUntilChanged, map, takeUntil, withLatestFrom } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 import { isValid } from 'date-fns';
 
-import { slideMotion } from 'ng-zorro-antd/core/animation';
+import { slideAnimationEnter, slideAnimationLeave } from 'ng-zorro-antd/core/animation';
 import { NzConfigKey, NzConfigService } from 'ng-zorro-antd/core/config';
-import { NzFormNoStatusService, NzFormPatchModule, NzFormStatusService } from 'ng-zorro-antd/core/form';
+import { NzFormItemFeedbackIconComponent, NzFormStatusService } from 'ng-zorro-antd/core/form';
 import { warn } from 'ng-zorro-antd/core/logger';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzOverlayModule } from 'ng-zorro-antd/core/overlay';
-import { BooleanInput, NgClassInterface, NzSafeAny, NzStatus, NzValidateStatus } from 'ng-zorro-antd/core/types';
-import { getStatusClassNames, InputBoolean, isNil } from 'ng-zorro-antd/core/util';
-import { DateHelperService, NzI18nInterface, NzI18nService } from 'ngx-antd-jalali/i18n';
+import { NgClassInterface, NzSafeAny, NzStatus, NzValidateStatus } from 'ng-zorro-antd/core/types';
+import { getStatusClassNames, isNil } from 'ng-zorro-antd/core/util';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { WithConfig } from 'ngx-antd-jalali/core';
+import { DateHelperService, NzI18nInterface, NzI18nService } from 'ngx-antd-jalali/i18n';
 
 import { NzTimePickerPanelComponent } from './time-picker-panel.component';
-import { WithConfig } from 'ngx-antd-jalali/core';
 
 const NZ_CONFIG_MODULE_NAME: NzConfigKey = 'timePicker';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'nz-time-picker',
-    exportAs: 'nzTimePicker',
-    template: `
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'nz-time-picker',
+  exportAs: 'nzTimePicker',
+  template: `
     <div class="ant-picker-input">
       <input
         #inputElement
@@ -75,17 +77,21 @@ const NZ_CONFIG_MODULE_NAME: NzConfigKey = 'timePicker';
         <ng-container *nzStringTemplateOutlet="nzSuffixIcon; let suffixIcon">
           <span nz-icon [nzType]="suffixIcon"></span>
         </ng-container>
-        <nz-form-item-feedback-icon *ngIf="hasFeedback && !!status" [status]="status"></nz-form-item-feedback-icon>
+        @if (hasFeedback && !!status) {
+          <nz-form-item-feedback-icon [status]="status"></nz-form-item-feedback-icon>
+        }
       </span>
-      <span *ngIf="nzAllowEmpty && !nzDisabled && value" class="ant-picker-clear" (click)="onClickClearBtn($event)">
-        <span
-          nz-icon
-          nzType="close-circle"
-          nzTheme="fill"
-          [attr.aria-label]="nzClearText"
-          [attr.title]="nzClearText"
-        ></span>
-      </span>
+      @if (nzAllowEmpty && !nzDisabled && value) {
+        <span class="ant-picker-clear" (click)="onClickClearBtn($event)">
+          <span
+            nz-icon
+            nzType="close-circle"
+            nzTheme="fill"
+            [attr.aria-label]="nzClearText"
+            [attr.title]="nzClearText"
+          ></span>
+        </span>
+      }
     </div>
 
     <ng-template
@@ -99,7 +105,12 @@ const NZ_CONFIG_MODULE_NAME: NzConfigKey = 'timePicker';
       (detach)="close()"
       (overlayOutsideClick)="onClickOutside($event)"
     >
-      <div [@slideMotion]="'enter'" class="ant-picker-dropdown" style="position: relative">
+      <div
+        class="ant-picker-dropdown"
+        style="position: relative"
+        [animate.enter]="timepickerAnimationEnter()"
+        [animate.leave]="timepickerAnimationLeave()"
+      >
         <div class="ant-picker-panel-container">
           <div tabindex="-1" class="ant-picker-panel">
             <nz-time-picker-panel
@@ -129,52 +140,51 @@ const NZ_CONFIG_MODULE_NAME: NzConfigKey = 'timePicker';
       </div>
     </ng-template>
   `,
-    host: {
-        class: 'ant-picker',
-        '[class.ant-picker-large]': `nzSize === 'large'`,
-        '[class.ant-picker-small]': `nzSize === 'small'`,
-        '[class.ant-picker-disabled]': `nzDisabled`,
-        '[class.ant-picker-focused]': `focused`,
-        '[class.ant-picker-rtl]': `dir === 'rtl'`,
-        '[class.ant-picker-borderless]': `nzBorderless`,
-        '(click)': 'open()'
-    },
-    animations: [slideMotion],
-    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: NzTimePickerComponent, multi: true }],
-    imports: [
-        AsyncPipe,
-        FormsModule,
-        NzOutletModule,
-        NzIconModule,
-        NzFormPatchModule,
-        NgIf,
-        NzTimePickerPanelComponent,
-        NgClass,
-        NzOverlayModule,
-        OverlayModule
-    ]
+  host: {
+    class: 'ant-picker',
+    '[class.ant-picker-large]': `nzSize === 'large'`,
+    '[class.ant-picker-small]': `nzSize === 'small'`,
+    '[class.ant-picker-disabled]': `nzDisabled`,
+    '[class.ant-picker-focused]': `focused`,
+    '[class.ant-picker-rtl]': `dir() === 'rtl'`,
+    '[class.ant-picker-borderless]': `nzBorderless`,
+    '(click)': 'open()'
+  },
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: NzTimePickerComponent, multi: true }],
+  imports: [
+    AsyncPipe,
+    FormsModule,
+    NzOutletModule,
+    NzIconModule,
+    NzFormItemFeedbackIconComponent,
+    NzTimePickerPanelComponent,
+    NgClass,
+    NzOverlayModule,
+    OverlayModule
+  ]
 })
-export class NzTimePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class NzTimePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges {
   readonly _nzModuleName: NzConfigKey = NZ_CONFIG_MODULE_NAME;
 
-  static ngAcceptInputType_nzUse12Hours: BooleanInput;
-  static ngAcceptInputType_nzHideDisabledOptions: BooleanInput;
-  static ngAcceptInputType_nzAllowEmpty: BooleanInput;
-  static ngAcceptInputType_nzDisabled: BooleanInput;
-  static ngAcceptInputType_nzAutoFocus: BooleanInput;
-  static ngAcceptInputType_nzBorderless: BooleanInput;
-  static ngAcceptInputType_nzInputReadOnly: BooleanInput;
+  public readonly nzConfigService = inject(NzConfigService);
+  protected readonly i18n = inject(NzI18nService);
+  protected readonly dir = inject(Directionality).valueSignal;
+  private readonly elementRef = inject(ElementRef);
+  private readonly renderer = inject(Renderer2);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly dateHelper = inject(DateHelperService);
+  private readonly platform = inject(Platform);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly nzFormStatusService = inject(NzFormStatusService, { optional: true });
 
   private _onChange?: (value: Date | null) => void;
   private _onTouched?: () => void;
-  private destroy$ = new Subject<void>();
   private isNzDisableFirstChange = true;
   isInit = false;
   focused = false;
   inputValue = '';
   value: Date | null = null;
   preValue: Date | null = null;
-  origin!: CdkOverlayOrigin;
   inputSize?: number;
   i18nPlaceHolder$: Observable<string | undefined> = of(undefined);
   overlayPositions: ConnectionPositionPair[] = [
@@ -207,12 +217,18 @@ export class NzTimePickerComponent implements ControlValueAccessor, OnInit, Afte
       overlayY: 'bottom'
     }
   ] as ConnectionPositionPair[];
-  dir: Direction = 'ltr';
   // status
   prefixCls = 'ant-picker';
   statusCls: NgClassInterface = {};
   status: NzValidateStatus = '';
   hasFeedback = false;
+
+  protected readonly timepickerAnimationEnter = slideAnimationEnter();
+  protected readonly timepickerAnimationLeave = slideAnimationLeave();
+
+  get origin(): ElementRef {
+    return this.elementRef;
+  }
 
   @ViewChild('inputElement', { static: true }) inputRef!: ElementRef<HTMLInputElement>;
   @Input() nzId: string | null = null;
@@ -233,18 +249,18 @@ export class NzTimePickerComponent implements ControlValueAccessor, OnInit, Afte
   @Input() nzDisabledSeconds?: (hour: number, minute: number) => number[];
   @Input() @WithConfig() nzFormat = 'HH:mm:ss';
   @Input() nzOpen = false;
-  @Input() @WithConfig() @InputBoolean() nzUse12Hours = false;
+  @Input({ transform: booleanAttribute }) @WithConfig() nzUse12Hours = false;
   @Input() @WithConfig() nzSuffixIcon: string | TemplateRef<NzSafeAny> = 'clock-circle';
 
   @Output() readonly nzOpenChange = new EventEmitter<boolean>();
 
-  @Input() @InputBoolean() nzHideDisabledOptions = false;
-  @Input() @WithConfig() @InputBoolean() nzAllowEmpty = true;
-  @Input() @InputBoolean() nzDisabled = false;
-  @Input() @InputBoolean() nzAutoFocus = false;
+  @Input({ transform: booleanAttribute }) nzHideDisabledOptions = false;
+  @Input({ transform: booleanAttribute }) @WithConfig() nzAllowEmpty = true;
+  @Input({ transform: booleanAttribute }) nzDisabled = false;
+  @Input({ transform: booleanAttribute }) nzAutoFocus = false;
   @Input() @WithConfig() nzBackdrop = false;
-  @Input() @InputBoolean() nzBorderless = false;
-  @Input() @InputBoolean() nzInputReadOnly = false;
+  @Input({ transform: booleanAttribute }) nzBorderless = false;
+  @Input({ transform: booleanAttribute }) nzInputReadOnly = false;
 
   emitValue(value: Date | null): void {
     this.setValue(value, true);
@@ -298,7 +314,8 @@ export class NzTimePickerComponent implements ControlValueAccessor, OnInit, Afte
   }
 
   onClickOutside(event: MouseEvent): void {
-    if (!this.element.nativeElement.contains(event.target)) {
+    const target = _getEventTarget(event);
+    if (!this.elementRef.nativeElement.contains(target)) {
       this.setCurrentValueAndClose();
     }
   }
@@ -360,49 +377,21 @@ export class NzTimePickerComponent implements ControlValueAccessor, OnInit, Afte
     this.close();
   }
 
-  constructor(
-    public nzConfigService: NzConfigService,
-    protected i18n: NzI18nService,
-    private element: ElementRef,
-    private renderer: Renderer2,
-    private cdr: ChangeDetectorRef,
-    private dateHelper: DateHelperService,
-    private platform: Platform,
-    @Optional() private directionality: Directionality,
-    @Optional() private nzFormStatusService?: NzFormStatusService,
-    @Optional() private nzFormNoStatusService?: NzFormNoStatusService
-  ) {}
-
   ngOnInit(): void {
     this.nzFormStatusService?.formStatusChanges
       .pipe(
-        distinctUntilChanged((pre, cur) => {
-          return pre.status === cur.status && pre.hasFeedback === cur.hasFeedback;
-        }),
-        withLatestFrom(this.nzFormNoStatusService ? this.nzFormNoStatusService.noFormStatus : of(false)),
-        map(([{ status, hasFeedback }, noStatus]) => ({ status: noStatus ? '' : status, hasFeedback })),
-        takeUntil(this.destroy$)
+        distinctUntilChanged((pre, cur) => pre.status === cur.status && pre.hasFeedback === cur.hasFeedback),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(({ status, hasFeedback }) => {
         this.setStatusStyles(status, hasFeedback);
       });
 
     this.inputSize = Math.max(8, this.nzFormat.length) + 2;
-    this.origin = new CdkOverlayOrigin(this.element);
 
     this.i18nPlaceHolder$ = this.i18n.localeChange.pipe(
       map((nzLocale: NzI18nInterface) => nzLocale.TimePicker.placeholder)
     );
-
-    this.dir = this.directionality.value;
-    this.directionality.change?.pipe(takeUntil(this.destroy$)).subscribe((direction: Direction) => {
-      this.dir = direction;
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -486,17 +475,16 @@ export class NzTimePickerComponent implements ControlValueAccessor, OnInit, Afte
   }
 
   private setStatusStyles(status: NzValidateStatus, hasFeedback: boolean): void {
-    // set inner status
     this.status = status;
     this.hasFeedback = hasFeedback;
     this.cdr.markForCheck();
-    // render status if nzStatus is set
     this.statusCls = getStatusClassNames(this.prefixCls, status, hasFeedback);
-    Object.keys(this.statusCls).forEach(status => {
-      if (this.statusCls[status]) {
-        this.renderer.addClass(this.element.nativeElement, status);
+    Object.keys(this.statusCls).forEach(statusCls => {
+      if (this.statusCls[statusCls]) {
+        this.renderer.addClass(this.elementRef.nativeElement, statusCls);
       } else {
-        this.renderer.removeClass(this.element.nativeElement, status);
+        this.renderer.removeAttribute(this.elementRef.nativeElement, statusCls);
+        this.renderer.removeClass(this.elementRef.nativeElement, statusCls);
       }
     });
   }

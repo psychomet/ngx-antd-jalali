@@ -21,14 +21,13 @@ import {
   SimpleChanges,
   TemplateRef,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { CandyDate, CandyDateFac } from 'ngx-antd-jalali/core';
-import { BooleanInput } from 'ng-zorro-antd/core/types';
-import { InputBoolean } from 'ng-zorro-antd/core/util';
 
 import {
   NzDateCellDirective as DateCell,
@@ -54,41 +53,37 @@ type NzCalendarDateTemplate = TemplateRef<{ $implicit: Date }>;
       (yearChange)="onYearSelect($event)"
       (monthChange)="onMonthSelect($event)"
     ></nz-calendar-header>
-
+    
     <div class="ant-picker-panel">
       <div class="ant-picker-{{ nzMode === 'month' ? 'date' : 'month' }}-panel">
         <div class="ant-picker-body">
-          <ng-container
-            *ngIf="nzMode === 'month'; then monthModeTable; else yearModeTable"
-          ></ng-container>
+          @if (nzMode === 'month') {
+            <!--  TODO(@wenqi73) [cellRender] [fullCellRender] -->
+            <date-table
+              [prefixCls]="prefixCls"
+              [value]="activeDate"
+              [activeDate]="activeDate"
+              [cellRender]="$any(dateCell)"
+              [fullCellRender]="$any(dateFullCell)"
+              [disabledDate]="nzDisabledDate"
+              (valueChange)="onDateSelect($event)"
+            ></date-table>
+          } @else {
+            <month-table
+              [prefixCls]="prefixCls"
+              [value]="activeDate"
+              [activeDate]="activeDate"
+              [cellRender]="$any(monthCell)"
+              [fullCellRender]="$any(monthFullCell)"
+              (valueChange)="onDateSelect($event)"
+            ></month-table>
+          }
         </div>
       </div>
     </div>
-    <ng-template #monthModeTable>
-      <!--  TODO(@wenqi73) [cellRender] [fullCellRender] -->
-      <date-table
-        [prefixCls]="prefixCls"
-        [value]="activeDate"
-        [activeDate]="activeDate"
-        [cellRender]="$any(dateCell)"
-        [fullCellRender]="$any(dateFullCell)"
-        [disabledDate]="nzDisabledDate"
-        (valueChange)="onDateSelect($event)"
-      ></date-table>
-    </ng-template>
-
+    
     <!--  TODO(@wenqi73) [cellRender] [fullCellRender] -->
-    <ng-template #yearModeTable>
-      <month-table
-        [prefixCls]="prefixCls"
-        [value]="activeDate"
-        [activeDate]="activeDate"
-        [cellRender]="$any(monthCell)"
-        [fullCellRender]="$any(monthFullCell)"
-        (valueChange)="onDateSelect($event)"
-      ></month-table>
-    </ng-template>
-  `,
+    `,
     host: {
         class: 'ant-picker-calendar',
         '[class.ant-picker-calendar-full]': 'nzFullscreen',
@@ -107,8 +102,6 @@ type NzCalendarDateTemplate = TemplateRef<{ $implicit: Date }>;
 export class NzCalendarComponent
   implements ControlValueAccessor, OnChanges, OnInit, OnDestroy
 {
-  static ngAcceptInputType_nzFullscreen: BooleanInput;
-
   activeDate: CandyDate = this.candyDate();
   prefixCls: string = 'ant-picker-calendar';
   private destroy$ = new Subject<void>();
@@ -162,7 +155,7 @@ export class NzCalendarComponent
     return (this.nzMonthFullCell || this.nzMonthFullCellChild)!;
   }
 
-  @Input() @InputBoolean() nzFullscreen: boolean = true;
+  @Input({ transform: booleanAttribute }) nzFullscreen: boolean = true;
 
   constructor(
     private cdr: ChangeDetectorRef,

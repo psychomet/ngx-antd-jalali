@@ -36,40 +36,43 @@ import { NzSelectSizeType } from 'ng-zorro-antd/select';
         [nzDropdownMatchSelectWidth]="false"
         [ngModel]="activeYear"
         (ngModelChange)="updateYear($event)"
-      >
-        <nz-option
-          *ngFor="let year of years"
-          [nzLabel]="year.label"
-          [nzValue]="year.value"
-        ></nz-option>
+        >
+        @for (year of years; track year) {
+          <nz-option
+            [nzLabel]="year.label"
+            [nzValue]="year.value"
+          ></nz-option>
+        }
       </nz-select>
-
-      <nz-select
-        *ngIf="mode === 'month'"
-        class="ant-picker-calendar-month-select"
-        [nzSize]="size"
-        [nzDropdownMatchSelectWidth]="false"
-        [ngModel]="activeMonth"
-        (ngModelChange)="monthChange.emit($event)"
-      >
-        <nz-option
-          *ngFor="let month of months"
-          [nzLabel]="month.label"
-          [nzValue]="month.value"
-        ></nz-option>
-      </nz-select>
-
+    
+      @if (mode === 'month') {
+        <nz-select
+          class="ant-picker-calendar-month-select"
+          [nzSize]="size"
+          [nzDropdownMatchSelectWidth]="false"
+          [ngModel]="activeMonth"
+          (ngModelChange)="monthChange.emit($event)"
+          >
+          @for (month of months; track month) {
+            <nz-option
+              [nzLabel]="month.label"
+              [nzValue]="month.value"
+            ></nz-option>
+          }
+        </nz-select>
+      }
+    
       <nz-radio-group
         class="ant-picker-calendar-mode-switch"
         [(ngModel)]="mode"
         (ngModelChange)="modeChange.emit($event)"
         [nzSize]="size"
-      >
+        >
         <label nz-radio-button nzValue="month">{{ monthTypeText }}</label>
         <label nz-radio-button nzValue="year">{{ yearTypeText }}</label>
       </nz-radio-group>
     </div>
-  `,
+    `,
     host: {
         class: 'ant-fullcalendar-header',
         '[style.display]': `'block'`,

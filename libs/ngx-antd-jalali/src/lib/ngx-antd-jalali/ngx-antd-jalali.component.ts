@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
 
 @Component({
     selector: 'ngx-antd-jalali-ngx-antd-jalali',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './ngx-antd-jalali.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-antd-jalali.component.less'
 })
 export class NgxAntdJalaliComponent {}

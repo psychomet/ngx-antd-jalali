@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NzDatePickerModule } from 'ngx-antd-jalali/date-picker';
 import { FormsModule } from '@angular/forms';
 
@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
     imports: [NzDatePickerModule, FormsModule],
     selector: 'ngx-antd-jalali-root',
     templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './app.component.less'
 })
 export class AppComponent {
