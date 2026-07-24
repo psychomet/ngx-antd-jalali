@@ -1,7 +1,7 @@
 {
   "version": "0.0.1",
   "name": "ngx-antd-jalali",
-  "description": "An DatePicker based on Ant Design and Angular",
+  "description": "Jalali DatePicker based on Ant Design and Angular 22",
   "keywords": [
     "antd",
     "jalali",
