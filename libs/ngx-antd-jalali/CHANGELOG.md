@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.3.1...ngx-antd-jalali-v2.0.0) (2026-07-24)
+
+
+* feat(ngx-antd-jalali)!: support Angular 22 and ng-zorro-antd 22 ([9f6cde5](https://github.com/psychomet/ngx-antd-jalali/commit/9f6cde56bd10abbe479ac23cdb1bf201eb7ac317))
+
+
+### BREAKING CHANGES
+
+* requires @angular/* ^22.0.0 and ng-zorro-antd ^22.0.0
+
+Co-authored-by: Cursor <cursoragent@cursor.com>
+
 ## [1.3.1](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.3.0...ngx-antd-jalali-v1.3.1) (2025-01-04)
 
 
