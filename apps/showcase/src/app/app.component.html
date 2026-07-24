@@ -1,1 +1,132 @@
-<nz-date-picker [nzShowTime]="true"></nz-date-picker>
+<main class="showcase">
+  <header class="showcase__header">
+    <h1>ngx-antd-jalali</h1>
+    <p>Jalali date &amp; time picker showcase</p>
+  </header>
+
+  <section class="showcase__section">
+    <h2>Date picker</h2>
+
+    <div class="showcase__grid">
+      <label class="showcase__field">
+        <span>Basic</span>
+        <nz-date-picker
+          [(ngModel)]="date"
+          nzPlaceHolder="Select date"
+          (ngModelChange)="onDateChange($event)"
+        ></nz-date-picker>
+        <code>{{ date | date: 'yyyy/MM/dd' }}</code>
+      </label>
+
+      <label class="showcase__field">
+        <span>With time</span>
+        <nz-date-picker
+          [(ngModel)]="dateTime"
+          [nzShowTime]="true"
+          nzPlaceHolder="Select date & time"
+          (ngModelChange)="onDateChange($event)"
+        ></nz-date-picker>
+        <code>{{ dateTime | date: 'yyyy/MM/dd HH:mm:ss' }}</code>
+      </label>
+
+      <label class="showcase__field">
+        <span>Disabled past dates</span>
+        <nz-date-picker
+          [(ngModel)]="date"
+          [nzDisabledDate]="disabledDate"
+          nzPlaceHolder="Future dates only"
+        ></nz-date-picker>
+      </label>
+
+      <label class="showcase__field">
+        <span>Range</span>
+        <nz-range-picker
+          [(ngModel)]="dateRange"
+          [nzPlaceHolder]="['Start date', 'End date']"
+          (ngModelChange)="onDateChange($event)"
+        ></nz-range-picker>
+        <code>{{ dateRange | json }}</code>
+      </label>
+
+      <label class="showcase__field">
+        <span>Month</span>
+        <nz-month-picker
+          [(ngModel)]="month"
+          nzPlaceHolder="Select month"
+          (ngModelChange)="onDateChange($event)"
+        ></nz-month-picker>
+        <code>{{ month | date: 'yyyy/MM' }}</code>
+      </label>
+
+      <label class="showcase__field">
+        <span>Year</span>
+        <nz-year-picker
+          [(ngModel)]="year"
+          nzPlaceHolder="Select year"
+          (ngModelChange)="onDateChange($event)"
+        ></nz-year-picker>
+        <code>{{ year | date: 'yyyy' }}</code>
+      </label>
+
+      <label class="showcase__field">
+        <span>Week</span>
+        <nz-week-picker
+          [(ngModel)]="week"
+          nzPlaceHolder="Select week"
+          (ngModelChange)="onDateChange($event)"
+        ></nz-week-picker>
+        <code>{{ week | date: 'yyyy/MM/dd' }}</code>
+      </label>
+    </div>
+  </section>
+
+  <section class="showcase__section">
+    <h2>Time picker</h2>
+
+    <div class="showcase__grid">
+      <label class="showcase__field">
+        <span>Basic</span>
+        <nz-time-picker
+          [(ngModel)]="time"
+          nzPlaceHolder="Select time"
+          (ngModelChange)="onTimeChange($event)"
+        ></nz-time-picker>
+        <code>{{ time | date: 'HH:mm:ss' }}</code>
+      </label>
+
+      <label class="showcase__field">
+        <span>12-hour</span>
+        <nz-time-picker
+          [(ngModel)]="time12h"
+          [nzUse12Hours]="true"
+          nzFormat="h:mm:ss a"
+          nzPlaceHolder="Select time"
+          (ngModelChange)="onTimeChange($event)"
+        ></nz-time-picker>
+        <code>{{ time12h | date: 'hh:mm:ss a' }}</code>
+      </label>
+
+      <label class="showcase__field">
+        <span>Hour / minute only</span>
+        <nz-time-picker
+          [(ngModel)]="time"
+          nzFormat="HH:mm"
+          nzPlaceHolder="HH:mm"
+          (ngModelChange)="onTimeChange($event)"
+        ></nz-time-picker>
+        <code>{{ time | date: 'HH:mm' }}</code>
+      </label>
+
+      <label class="showcase__field">
+        <span>Disabled early hours</span>
+        <nz-time-picker
+          [(ngModel)]="timeDisabled"
+          [nzDisabledHours]="disabledHours"
+          nzPlaceHolder="After 06:00"
+          (ngModelChange)="onTimeChange($event)"
+        ></nz-time-picker>
+        <code>{{ timeDisabled | date: 'HH:mm:ss' }}</code>
+      </label>
+    </div>
+  </section>
+</main>

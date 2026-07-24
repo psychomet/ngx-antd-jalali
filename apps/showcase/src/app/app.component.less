@@ -1,0 +1,74 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f5f5f5;
+  color: #1f1f1f;
+  font-family: Vazirmatn, Tahoma, sans-serif;
+}
+
+.showcase {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.showcase__header {
+  margin-bottom: 2rem;
+
+  h1 {
+    margin: 0 0 0.35rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+  }
+}
+
+.showcase__section {
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 8px;
+
+  h2 {
+    margin: 0 0 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+}
+
+.showcase__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.showcase__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  > span {
+    font-size: 0.875rem;
+    color: #555;
+  }
+
+  code {
+    font-size: 0.75rem;
+    color: #888;
+    word-break: break-all;
+  }
+
+  nz-date-picker,
+  nz-range-picker,
+  nz-month-picker,
+  nz-year-picker,
+  nz-week-picker,
+  nz-time-picker {
+    width: 100%;
+  }
+}
