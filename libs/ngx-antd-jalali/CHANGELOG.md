@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v2.0.0...ngx-antd-jalali-v2.0.1) (2026-07-25)
+
+
+### Bug Fixes
+
+* **ngx-antd-jalali:** update StackBlitz demo link ([3ca9318](https://github.com/psychomet/ngx-antd-jalali/commit/3ca93189c8bfb700cda52878ae24d4b45f0e63bc))
+
 # [2.0.0](https://github.com/psychomet/ngx-antd-jalali/compare/ngx-antd-jalali-v1.3.1...ngx-antd-jalali-v2.0.0) (2026-07-24)
 
 
