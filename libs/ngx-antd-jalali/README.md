@@ -21,7 +21,7 @@ Angular Jalali (Persian) date picker, time picker, and calendar based on [NG-ZOR
 
 ## Demo
 
-View DatePickerJalali in action at [StackBlitz Demo](https://stackblitz.com/edit/ng-met-antd-datepicker)
+View DatePickerJalali in action at [StackBlitz Demo](https://stackblitz.com/edit/ngx-antd-jalali)
 
 <img src="https://user-images.githubusercontent.com/42533472/171279996-75478af5-7977-4845-bf56-846c448308ae.gif" alt="jalali-date-picker" style="max-width: 100%; display: inline-block;">
 
